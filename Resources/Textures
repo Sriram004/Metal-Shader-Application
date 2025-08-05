@@ -1,0 +1,23 @@
+This folder is intended for storing external texture resources used in the Metal shader pipeline. You can place image files here (e.g., `.png`, `.jpg`, `.hdr`) that will be loaded into Metal for use as:
+
+- Background overlays
+- LUTs (Lookup Tables)
+- Noise maps for film grain
+- Custom mask or blending textures
+
+## How to Use
+Use `MTKTextureLoader` in Swift to load any of these textures:
+
+```swift
+let textureLoader = MTKTextureLoader(device: device)
+if let url = Bundle.main.url(forResource: "noise", withExtension: "png") {
+    let texture = try? textureLoader.newTexture(URL: url, options: nil)
+}
+```
+
+## Notes
+- Make sure textures are added to the Xcode target under **Build Phases > Copy Bundle Resources**.
+- Use power-of-two sizes (e.g., 512×512, 1024×1024) for better GPU performance.
+
+---
+Feel free to delete this file before submission if not using any textures.
